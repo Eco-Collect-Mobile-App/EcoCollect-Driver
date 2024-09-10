@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "719946172570",
+    "project_id": "eco-collect-app",
+    "storage_bucket": "eco-collect-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:719946172570:android:55904ec3121b932382f723",
+        "android_client_info": {
+          "package_name": "com.example.eco_collect"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCg2RysOHR1JfZmhagWw_yMc1bUXUKYLjU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
