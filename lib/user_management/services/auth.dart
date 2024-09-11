@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:eco_collect/sahan/models/UserModel.dart';
+import 'package:eco_collect/user_management/models/UserModel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthServices {
