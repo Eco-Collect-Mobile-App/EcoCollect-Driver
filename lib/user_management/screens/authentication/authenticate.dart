@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:eco_collect/sahan/screens/authentication/loging.dart';
-import 'package:eco_collect/sahan/screens/authentication/register.dart';
+import 'package:eco_collect/user_management/screens/authentication/loging.dart';
+import 'package:eco_collect/user_management/screens/authentication/register.dart';
 
 class Authenticate extends StatefulWidget {
   const Authenticate({super.key});

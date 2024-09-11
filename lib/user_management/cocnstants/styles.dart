@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:eco_collect/sahan/cocnstants/colors.dart';
+import 'package:eco_collect/user_management/cocnstants/colors.dart';
 
 const TextStyle descriptionStyle = TextStyle(
   fontSize: 12,

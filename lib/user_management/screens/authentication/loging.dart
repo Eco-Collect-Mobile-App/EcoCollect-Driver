@@ -1,9 +1,9 @@
-import 'package:eco_collect/sahan/cocnstants/colors.dart';
-import 'package:eco_collect/sahan/cocnstants/discription.dart';
-import 'package:eco_collect/sahan/cocnstants/styles.dart';
-import 'package:eco_collect/sahan/services/auth.dart';
+import 'package:eco_collect/user_management/cocnstants/colors.dart';
+import 'package:eco_collect/user_management/cocnstants/discription.dart';
+import 'package:eco_collect/user_management/cocnstants/styles.dart';
+import 'package:eco_collect/user_management/services/auth.dart';
 import 'package:flutter/material.dart';
-import 'package:eco_collect/sahan/screens/authentication/register.dart';
+import 'package:eco_collect/user_management/screens/authentication/register.dart';
 
 class Sign_In extends StatefulWidget {
   final Function toggle;

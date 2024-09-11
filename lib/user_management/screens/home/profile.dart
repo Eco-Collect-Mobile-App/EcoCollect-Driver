@@ -1,6 +1,6 @@
-import 'package:eco_collect/sahan/services/auth.dart';
+import 'package:eco_collect/user_management/services/auth.dart';
 import 'package:flutter/material.dart';
-import 'package:eco_collect/sahan/cocnstants/colors.dart';
+import 'package:eco_collect/user_management/cocnstants/colors.dart';
 
 class Profile extends StatefulWidget {
   @override

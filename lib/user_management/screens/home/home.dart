@@ -1,5 +1,5 @@
-import 'package:eco_collect/sahan/screens/home/profile.dart';
-import 'package:eco_collect/sahan/services/auth.dart';
+import 'package:eco_collect/user_management/screens/home/profile.dart';
+import 'package:eco_collect/user_management/services/auth.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
