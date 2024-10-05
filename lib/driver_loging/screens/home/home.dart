@@ -2,6 +2,9 @@ import 'package:eco_collect/driver_loging/screens/home/profile.dart';
 
 import 'package:flutter/material.dart';
 
+import 'package:eco_collect/pages/qr_code_scanner.dart';
+import 'package:eco_collect/pages/all_requests.dart';
+
 class Home extends StatelessWidget {
   final String driverId;
 
@@ -57,6 +60,30 @@ class Home extends StatelessWidget {
                   );
                 },
                 child: const Text("Go to Profile"),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  // Navigate to QRCodeScanner page when the button is pressed
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const QRCodeScanner(),
+                    ),
+                  );
+                },
+                child: const Text('Go to QR Code Scanner'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  // Navigate to QRCodeScanner page when the button is pressed
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PickupReqHistory(),
+                    ),
+                  );
+                },
+                child: const Text('All Requests'),
               ),
             ],
           ),

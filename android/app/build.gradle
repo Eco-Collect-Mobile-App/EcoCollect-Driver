@@ -1,12 +1,15 @@
 plugins {
     id "com.android.application"
     id "kotlin-android"
-    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id "dev.flutter.flutter-gradle-plugin"
     id 'com.google.gms.google-services'
+    id 'kotlin-parcelize'
 }
 
 android {
+    viewBinding {
+    enabled = true
+}
     namespace = "com.example.eco_collect"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
