@@ -14,25 +14,22 @@ class FetchDocumentPage extends StatefulWidget {
 class _FetchDocumentPageState extends State<FetchDocumentPage> {
   Map<String, dynamic>? documentData;
 
-  // Add TextEditingController for editable fields
   late TextEditingController addressController;
   late TextEditingController nicController;
   late TextEditingController pickupDateController;
   late TextEditingController pickupTimeController;
-  late List<TextEditingController>
-      wasteEntryControllers; // Controllers for waste entries
+  late List<TextEditingController> wasteEntryControllers;
   late List<Map<String, dynamic>> wasteEntries;
 
   @override
   void initState() {
     super.initState();
-    wasteEntryControllers = []; // Initialize the list for controllers
+    wasteEntryControllers = [];
     _fetchDocumentFromFirestore(widget.documentId);
   }
 
   @override
   void dispose() {
-    // Dispose of all controllers
     addressController.dispose();
     nicController.dispose();
     pickupDateController.dispose();
@@ -43,10 +40,9 @@ class _FetchDocumentPageState extends State<FetchDocumentPage> {
     super.dispose();
   }
 
-  // Method to fetch Firestore document using the scanned document ID
   Future<void> _fetchDocumentFromFirestore(String? documentId) async {
     if (documentId != null) {
-      print("Scanned Document ID: $documentId"); // Log the scanned ID
+      print("Scanned Document ID: $documentId");
       try {
         DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
             .collection('wasteData')
@@ -57,7 +53,6 @@ class _FetchDocumentPageState extends State<FetchDocumentPage> {
           setState(() {
             documentData = documentSnapshot.data() as Map<String, dynamic>?;
 
-            // Initialize TextEditingControllers with fetched data
             addressController =
                 TextEditingController(text: documentData?['address'] ?? '');
             nicController =
@@ -66,20 +61,13 @@ class _FetchDocumentPageState extends State<FetchDocumentPage> {
                 TextEditingController(text: documentData?['pickupDate'] ?? '');
             pickupTimeController =
                 TextEditingController(text: documentData?['pickupTime'] ?? '');
-
-            // Initialize waste entries
             wasteEntries = List<Map<String, dynamic>>.from(
                 documentData?['wasteEntries'] ?? []);
-
-            // Initialize controllers for waste entries
             wasteEntryControllers = wasteEntries
                 .map((entry) => TextEditingController(
-                    text: entry['weight']?.toString() ??
-                        '')) // Initialize with weight
+                    text: entry['weight']?.toString() ?? ''))
                 .toList();
           });
-
-          // Log to verify all fetched data
           print("Document Data: $documentData");
         } else {
           _showError("Document not found.");
@@ -94,17 +82,14 @@ class _FetchDocumentPageState extends State<FetchDocumentPage> {
     }
   }
 
-  // Method to update Firestore document with edited data
   Future<void> _submitEditedData() async {
     if (widget.documentId != null && documentData != null) {
       try {
-        // Update the wasteEntries with current values from controllers
         for (int i = 0; i < wasteEntries.length; i++) {
           wasteEntries[i]['weight'] = wasteEntryControllers[i].text.isNotEmpty
-              ? wasteEntryControllers[i].text
-              : null; // Allow null if empty
+              ? double.tryParse(wasteEntryControllers[i].text)
+              : null;
         }
-
         await FirebaseFirestore.instance
             .collection('wasteData')
             .doc(widget.documentId)
@@ -115,8 +100,6 @@ class _FetchDocumentPageState extends State<FetchDocumentPage> {
           'pickupTime': pickupTimeController.text,
           'wasteEntries': wasteEntries,
         });
-
-        // Show confirmation message
         _showConfirmation("Data updated successfully.");
       } catch (e) {
         print("Error updating document: $e");
@@ -125,7 +108,6 @@ class _FetchDocumentPageState extends State<FetchDocumentPage> {
     }
   }
 
-  // Show a confirmation dialog after successful submission
   void _showConfirmation(String message) {
     showDialog(
       context: context,
@@ -146,7 +128,6 @@ class _FetchDocumentPageState extends State<FetchDocumentPage> {
     );
   }
 
-  // Widget for displaying and editing waste entries
   Widget _buildWasteEntryEditor(int index) {
     return Card(
       elevation: 2,
@@ -165,9 +146,8 @@ class _FetchDocumentPageState extends State<FetchDocumentPage> {
                   fontSize: 18,
                   fontWeight: FontWeight.w700,
                 ),
-                fillColor:
-                    Color.fromARGB(255, 235, 235, 235), // Change fill color
-                filled: true, // Enable the fill color
+                fillColor: Color.fromARGB(255, 235, 235, 235),
+                filled: true,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(12)),
                 ),
@@ -189,10 +169,9 @@ class _FetchDocumentPageState extends State<FetchDocumentPage> {
                 });
               },
               controller: TextEditingController(
-                text: wasteEntries[index]['wasteType'] ??
-                    '', // Use empty string if null
+                text: wasteEntries[index]['wasteType'] ?? '',
               ),
-              readOnly: true, // Make this field read-only
+              readOnly: true,
             ),
             SizedBox(height: 10),
             TextField(
@@ -203,9 +182,8 @@ class _FetchDocumentPageState extends State<FetchDocumentPage> {
                   fontSize: 18,
                   fontWeight: FontWeight.w700,
                 ),
-                fillColor:
-                    Color.fromARGB(255, 235, 235, 235), // Change fill color
-                filled: true, // Enable the fill color
+                fillColor: Color.fromARGB(255, 235, 235, 235),
+                filled: true,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(12)),
                 ),
@@ -228,23 +206,21 @@ class _FetchDocumentPageState extends State<FetchDocumentPage> {
                 });
               },
               controller: TextEditingController(
-                text: wasteEntries[index]['bagCount']?.toString() ??
-                    '', // Use empty string if null
+                text: wasteEntries[index]['bagCount']?.toString() ?? '',
               ),
-              readOnly: true, // Make this field read-only
+              readOnly: true,
             ),
             SizedBox(height: 10),
             TextField(
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Weight',
                 labelStyle: TextStyle(
                   color: Color.fromARGB(255, 70, 164, 97),
                   fontSize: 18,
                   fontWeight: FontWeight.w700,
                 ),
-                fillColor:
-                    Color.fromARGB(255, 235, 235, 235), // Change fill color
-                filled: true, // Enable the fill color
+                fillColor: Color.fromARGB(255, 255, 255, 255),
+                filled: true,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(12)),
                 ),
@@ -260,21 +236,34 @@ class _FetchDocumentPageState extends State<FetchDocumentPage> {
                 contentPadding:
                     EdgeInsets.symmetric(vertical: 10, horizontal: 16),
               ),
-              keyboardType: TextInputType.text, // Allow any text input
+              keyboardType: TextInputType.number,
               onChanged: (value) {
                 setState(() {
-                  // Store weight as a string; accept any input
-                  wasteEntries[index]['weight'] =
-                      value.isNotEmpty ? value : null; // Allow null if empty
+                  if (_isValidWeight(value)) {
+                    wasteEntries[index]['weight'] =
+                        value.isNotEmpty ? double.tryParse(value) : null;
+                  }
                 });
               },
-              controller: wasteEntryControllers[
-                  index], // Use the controller from the list
+              controller: wasteEntryControllers[index],
             ),
           ],
         ),
       ),
     );
+  }
+
+  bool _isValidWeight(String value) {
+    if (value.isEmpty) return true;
+    return RegExp(r'^\d*\.?\d*$').hasMatch(value);
+  }
+
+  String? _getWeightErrorText(String value) {
+    if (value.isEmpty) return null;
+    if (!_isValidWeight(value)) {
+      return 'Please enter a valid number';
+    }
+    return null;
   }
 
   @override
@@ -286,7 +275,7 @@ class _FetchDocumentPageState extends State<FetchDocumentPage> {
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
         ),
-        title: const Text("Insert Garbage Weights",
+        title: const Text("Insert Garbage Weight",
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
         centerTitle: true,
       ),
@@ -307,16 +296,15 @@ class _FetchDocumentPageState extends State<FetchDocumentPage> {
                           TextField(
                             controller: addressController,
                             readOnly: true,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               labelText: "Address",
                               labelStyle: TextStyle(
                                 color: Color.fromARGB(255, 69, 69, 69),
                                 fontSize: 18,
                                 fontWeight: FontWeight.w700,
                               ),
-                              fillColor: Color.fromARGB(
-                                  255, 235, 235, 235), // Change fill color
-                              filled: true, // Enable the fill color
+                              fillColor: Color.fromARGB(255, 235, 235, 235),
+                              filled: true,
                               border: OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(12)),
@@ -337,15 +325,14 @@ class _FetchDocumentPageState extends State<FetchDocumentPage> {
                               contentPadding: EdgeInsets.symmetric(
                                   vertical: 10, horizontal: 16),
                             ),
-                            style: TextStyle(
-                                color:
-                                    const Color.fromARGB(255, 133, 133, 133)),
+                            style: const TextStyle(
+                                color: Color.fromARGB(255, 133, 133, 133)),
                           ),
                           SizedBox(height: 10),
                           TextField(
                             controller: pickupDateController,
                             readOnly: true,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               labelText: "Pickup Date",
                               labelStyle: TextStyle(
                                 color: Color.fromARGB(255, 69, 69, 69),
@@ -375,15 +362,14 @@ class _FetchDocumentPageState extends State<FetchDocumentPage> {
                               contentPadding: EdgeInsets.symmetric(
                                   vertical: 10, horizontal: 16),
                             ),
-                            style: TextStyle(
-                                color:
-                                    const Color.fromARGB(255, 133, 133, 133)),
+                            style: const TextStyle(
+                                color: Color.fromARGB(255, 133, 133, 133)),
                           ),
                           SizedBox(height: 10),
                           TextField(
                             controller: pickupTimeController,
                             readOnly: true,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               labelText: "Pickup Time",
                               labelStyle: TextStyle(
                                 color: Color.fromARGB(255, 69, 69, 69),
@@ -413,9 +399,8 @@ class _FetchDocumentPageState extends State<FetchDocumentPage> {
                               contentPadding: EdgeInsets.symmetric(
                                   vertical: 10, horizontal: 16),
                             ),
-                            style: TextStyle(
-                                color:
-                                    const Color.fromARGB(255, 133, 133, 133)),
+                            style: const TextStyle(
+                                color: Color.fromARGB(255, 133, 133, 133)),
                           ),
                           SizedBox(height: 10),
                         ],
@@ -423,10 +408,10 @@ class _FetchDocumentPageState extends State<FetchDocumentPage> {
                     ),
                   ),
                   SizedBox(height: 20),
-                  Text(
+                  const Text(
                     "Waste Details",
                     style: TextStyle(
-                        color: const Color.fromARGB(255, 66, 66, 66),
+                        color: Color.fromARGB(255, 66, 66, 66),
                         fontSize: 18,
                         fontWeight: FontWeight.w700),
                   ),
