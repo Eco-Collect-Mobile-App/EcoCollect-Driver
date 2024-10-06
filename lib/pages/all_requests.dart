@@ -6,7 +6,6 @@ class PickupReqHistory extends StatefulWidget {
   const PickupReqHistory({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
   _PickupReqHistoryState createState() => _PickupReqHistoryState();
 }
 

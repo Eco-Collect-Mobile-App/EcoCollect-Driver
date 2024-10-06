@@ -339,9 +339,8 @@ class _FetchDocumentPageState extends State<FetchDocumentPage> {
                                 fontSize: 18,
                                 fontWeight: FontWeight.w700,
                               ),
-                              fillColor: Color.fromARGB(
-                                  255, 235, 235, 235), // Change fill color
-                              filled: true, // Enable the fill color
+                              fillColor: Color.fromARGB(255, 235, 235, 235),
+                              filled: true,
                               border: OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(12)),
@@ -376,9 +375,8 @@ class _FetchDocumentPageState extends State<FetchDocumentPage> {
                                 fontSize: 18,
                                 fontWeight: FontWeight.w700,
                               ),
-                              fillColor: Color.fromARGB(
-                                  255, 235, 235, 235), // Change fill color
-                              filled: true, // Enable the fill color
+                              fillColor: Color.fromARGB(255, 235, 235, 235),
+                              filled: true,
                               border: OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(12)),
@@ -424,12 +422,11 @@ class _FetchDocumentPageState extends State<FetchDocumentPage> {
                   SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: () async {
-                      await _submitEditedData(); // Submit the edited data
+                      await _submitEditedData();
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>
-                              const QRCodeScanner(), // Navigate to QRCodeScanner
+                          builder: (context) => const QRCodeScanner(),
                         ),
                       );
                     },
@@ -445,7 +442,6 @@ class _FetchDocumentPageState extends State<FetchDocumentPage> {
     );
   }
 
-  // Show error message if fetching fails or document is not found
   void _showError(String message) {
     showDialog(
       context: context,
