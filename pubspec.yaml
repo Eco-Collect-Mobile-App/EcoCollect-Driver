@@ -41,6 +41,8 @@ dependencies:
   cloud_firestore: ^5.4.2
   firebase_dart: ^1.2.1
   qr_code_scanner: ^1.0.0
+  iconsax: ^0.0.8
+  get: ^4.6.6
 
 dev_dependencies:
   flutter_test:

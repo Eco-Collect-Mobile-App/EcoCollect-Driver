@@ -1,7 +1,5 @@
 import 'package:eco_collect/driver_loging/screens/home/profile.dart';
-
 import 'package:flutter/material.dart';
-
 import 'package:eco_collect/pages/qr_code_scanner.dart';
 import 'package:eco_collect/pages/all_requests.dart';
 
@@ -16,9 +14,10 @@ class Home extends StatelessWidget {
       backgroundColor: const Color(0XffE7EBE8),
       appBar: AppBar(
         title: const Text(
-          'Home',
+          'Dashboard',
           style: TextStyle(color: Colors.white),
         ),
+        centerTitle: true,
         backgroundColor: const Color(0Xff27AE60),
         actions: [
           ElevatedButton(
@@ -37,13 +36,6 @@ class Home extends StatelessWidget {
         child: Center(
           child: Column(
             children: [
-              const Text(
-                "HOME",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w800),
-              ),
               const SizedBox(height: 30),
               Center(
                 child: Image.asset(
@@ -52,6 +44,10 @@ class Home extends StatelessWidget {
                 ),
               ),
               ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0Xff27AE60), // Green color
+                  foregroundColor: Colors.white, // White text color
+                ),
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -62,6 +58,10 @@ class Home extends StatelessWidget {
                 child: const Text("Go to Profile"),
               ),
               ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0Xff27AE60), // Green color
+                  foregroundColor: Colors.white, // White text color
+                ),
                 onPressed: () {
                   // Navigate to QRCodeScanner page when the button is pressed
                   Navigator.push(
@@ -74,8 +74,12 @@ class Home extends StatelessWidget {
                 child: const Text('Go to QR Code Scanner'),
               ),
               ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0Xff27AE60), // Green color
+                  foregroundColor: Colors.white, // White text color
+                ),
                 onPressed: () {
-                  // Navigate to QRCodeScanner page when the button is pressed
+                  // Navigate to PickupReqHistory page when the button is pressed
                   Navigator.push(
                     context,
                     MaterialPageRoute(
